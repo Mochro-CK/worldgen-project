@@ -10,7 +10,7 @@ public class MapGenEditor : Editor
     {
         MapGenerator mapGen = (MapGenerator)target;
 
-        if (DrawDefaultInspector()) ;
+        if (DrawDefaultInspector())
         { 
         if (mapGen.autoUpdate)
             {
