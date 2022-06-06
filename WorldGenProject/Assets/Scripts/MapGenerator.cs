@@ -10,8 +10,8 @@ public class MapGenerator : MonoBehaviour
     public int mapWidth;
     public int mapHeight;
     public float noiseScale;
-
     public int octaves;
+
     [Range(0,1)]
     public float persistance;
     public float lacunarity;
@@ -83,6 +83,7 @@ public struct TerrainType
 {
     public string name;
     public float height;
+    public float temp;
     public Color colour;
 
 }

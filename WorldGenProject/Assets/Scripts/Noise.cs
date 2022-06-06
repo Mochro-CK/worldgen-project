@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public static class Noise
 {
-
     public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset)
     {
         float[,] noiseMap = new float[mapWidth, mapHeight];
@@ -17,7 +17,6 @@ public static class Noise
             float offsetY = prng.Next(-10000,10000)+ offset.y;
             octaveOffsets[i] = new Vector2(offsetX, offsetY);
         }
-
         if (scale <= 0)
         {
             scale = 0.0001f;
@@ -25,7 +24,6 @@ public static class Noise
 
         float maxNoiseHeight = float.MinValue;
         float minNoiseHeight = float.MaxValue;
-
         float halfWidth = mapWidth / 2f;
         float halfHeight = mapHeight / 2f;
 
@@ -37,8 +35,6 @@ public static class Noise
                 float amplitude = 1;
                 float frequency = 1;
                 float noiseHeight = 0;
-
-
                 for (int i = 0; i < octaves; i++)
                 {
                     float sampleX = (x-halfWidth) / scale * frequency + octaveOffsets[i].x;
@@ -72,6 +68,7 @@ public static class Noise
         }
         return noiseMap;
     }
+
 
 }
 
