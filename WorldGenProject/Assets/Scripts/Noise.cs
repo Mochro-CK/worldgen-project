@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+
 public static class Noise
 {
     public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset)
@@ -17,6 +17,7 @@ public static class Noise
             float offsetY = prng.Next(-10000,10000)+ offset.y;
             octaveOffsets[i] = new Vector2(offsetX, offsetY);
         }
+
         if (scale <= 0)
         {
             scale = 0.0001f;
@@ -69,6 +70,72 @@ public static class Noise
         return noiseMap;
     }
 
+
+    public static float[,] GenerateTempMap(int mapWidth, int mapHeight, int Tseed, float Tscale, int Toctaves, float Tpersistance, float Tlacunarity, Vector2 Toffset)
+    {
+        float[,] TempnoiseMap = new float[mapWidth, mapHeight];
+
+        System.Random prng = new System.Random(Tseed);
+        Vector2[] ToctaveOffsets = new Vector2[Toctaves];
+        for (int i = 0; i < Toctaves; i++)
+        {
+            float ToffsetX = prng.Next(-10000, 10000) + Toffset.x;
+            float ToffsetY = prng.Next(-10000, 10000) + Toffset.y;
+            ToctaveOffsets[i] = new Vector2(ToffsetX, ToffsetY);
+        }
+
+        if (Tscale <= 0)
+        {
+            Tscale = 0.0001f;
+        }
+
+        float maxNoiseHeight = float.MinValue;
+        float minNoiseHeight = float.MaxValue;
+        float halfWidth = mapWidth / 2f;
+        float halfHeight = mapHeight / 2f;
+
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+
+                float Tamplitude = 1;
+                float Tfrequency = 1;
+                float TnoiseHeight = 0;
+                for (int i = 0; i < Toctaves; i++)
+                {
+                    float sampleX = (x - halfWidth) / Tscale * Tfrequency + ToctaveOffsets[i].x;
+                    float sampleY = (y - halfHeight) / Tscale * Tfrequency + ToctaveOffsets[i].y;
+
+                    float perinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
+                    TnoiseHeight += perinValue * Tamplitude;
+
+                    Tamplitude *= Tpersistance;
+                    Tfrequency *= Tlacunarity;
+
+                }
+
+                if (TnoiseHeight > maxNoiseHeight)
+                {
+                    maxNoiseHeight = TnoiseHeight;
+                }
+                else if (TnoiseHeight < minNoiseHeight)
+                {
+                    minNoiseHeight = TnoiseHeight;
+                }
+
+                TempnoiseMap[x, y] = TnoiseHeight;
+            }
+        }
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                TempnoiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, TempnoiseMap[x, y]);
+            }
+        }
+        return TempnoiseMap;
+    }
 
 }
 
