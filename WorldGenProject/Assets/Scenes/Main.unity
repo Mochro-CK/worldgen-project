@@ -200,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 535198095}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1000, y: 1, z: 1000}
+  m_LocalScale: {x: 1500, y: 1, z: 1500}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -237,86 +237,83 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 1
-  mapWidth: 1000
-  mapHeight: 1000
-  noiseScale: 60
-  octaves: 1
-  persistance: 0.15
+  mapWidth: 1500
+  mapHeight: 1500
+  seed: 285
+  Tseed: 227
+  Wtrseed: 401
+  autoUpdate: 0
+  noiseScale: 200
+  octaves: 2
+  persistance: 0.5
   lacunarity: 1
-  seed: 5216
   offset: {x: 0, y: 0}
-  TnoiseScale: 255
-  Toctaves: 2
-  Tpersistance: 0.15
-  Tlacunarity: 5
-  Tseed: 779
+  TnoiseScale: 500
+  Toctaves: 5
+  Tpersistance: 0.2
+  Tlacunarity: 1
   Toffset: {x: 0, y: 0}
-  autoUpdate: 1
+  WtrnoiseScale: 250
+  Wtroctaves: 5
+  Wtrpersistance: 1
+  Wtrlacunarity: 1
+  Wtroffset: {x: 0, y: 0}
   regions:
-  - name: deep water
-    height: 0.1
-    temp: 0.1
-    colour: {r: 0.22917409, g: 0.41594544, b: 0.4716981, a: 0}
-  - name: Cold deep water
-    height: 0.1
-    temp: 2
-    colour: {r: 0.22957455, g: 0.541188, b: 0.6320754, a: 0}
-  - name: Water
-    height: 0.25
-    temp: 0.2
-    colour: {r: 0.23616058, g: 0.49749872, b: 0.5754717, a: 0}
-  - name: Cold Water
-    height: 0.25
-    temp: 2
-    colour: {r: 0.3507031, g: 0.5964531, b: 0.6698113, a: 0}
-  - name: Beach
-    height: 0.27
-    temp: 0.85
-    colour: {r: 0.7986305, g: 0.8301887, b: 0.29369885, a: 0}
-  - name: Cold Beach
-    height: 0.27
-    temp: 2
-    colour: {r: 0.73440295, g: 0.745283, b: 0.5589622, a: 0}
-  - name: Dessert
-    height: 0.35
-    temp: 0.75
-    colour: {r: 0.86695135, g: 0.9150943, b: 0.09064613, a: 0}
-  - name: Tundra
-    height: 0.35
-    temp: 2
-    colour: {r: 0.7486066, g: 0.764151, b: 0.5154415, a: 0}
-  - name: Inlands
-    height: 0.4
-    temp: 1
-    colour: {r: 0.29901874, g: 0.7169812, b: 0.27394092, a: 0}
-  - name: ColdInlands
-    height: 0.4
-    temp: 2
-    colour: {r: 0.38719293, g: 0.7264151, b: 0.4708031, a: 0}
+  - name: LEAVEBLANK
+    height: 0
+    temp: 0
+    water: 0
+    colour: {r: 0, g: 0, b: 0, a: 0}
   - name: Land
-    height: 0.7
-    temp: 0.8
-    colour: {r: 0.18503025, g: 0.6226415, b: 0.22408104, a: 0}
-  - name: ColdLand
-    height: 0.7
-    temp: 2
-    colour: {r: 0.44335175, g: 0.764151, b: 0.46404845, a: 0}
-  - name: Hill
-    height: 0.8
-    temp: 0.8
-    colour: {r: 0.57821953, g: 0.5943396, b: 0.52985936, a: 0}
-  - name: Coldill
-    height: 0.8
-    temp: 2
-    colour: {r: 0.45844832, g: 0.46226418, b: 0.44700074, a: 0}
+    height: 0.2
+    temp: 0.5
+    water: 0
+    colour: {r: 0.3621791, g: 0.764151, b: 0.26312745, a: 0}
+  - name: Inland
+    height: 0.3
+    temp: 1
+    water: 0
+    colour: {r: 0.3871589, g: 0.6603774, b: 0.32084376, a: 0}
+  - name: Desert
+    height: 0.3
+    temp: 0.5
+    water: 0
+    colour: {r: 1, g: 0.5779401, b: 0, a: 0}
+  - name: Tundra
+    height: 0.45
+    temp: 1
+    water: 0
+    colour: {r: 0.990566, g: 0.80652523, b: 0.55602527, a: 0}
+  - name: ColdWater
+    height: 0.1
+    temp: 1
+    water: 0.55
+    colour: {r: 0, g: 0.8446779, b: 1, a: 0}
+  - name: ColdWater
+    height: 0.1
+    temp: 1
+    water: 0.55
+    colour: {r: 0, g: 0.8446779, b: 1, a: 0}
+  - name: Beach
+    height: 0.2
+    temp: 1
+    water: 0.5
+    colour: {r: 0.48001543, g: 0.5849056, b: 0.10760058, a: 0}
+  - name: HillLand
+    height: 0.5
+    temp: 0.6
+    water: 0
+    colour: {r: 0.46226418, g: 0.4054334, b: 0.28128338, a: 0}
   - name: Mountain
-    height: 0.95
-    temp: 2
-    colour: {r: 0.21698111, g: 0.20162867, b: 0.20162867, a: 0}
+    height: 1
+    temp: 0.7
+    water: 0
+    colour: {r: 0.1792453, g: 0.1690442, b: 0.14796191, a: 0}
   - name: Snow
     height: 1
-    temp: 2
-    colour: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 0}
+    temp: 1
+    water: 0
+    colour: {r: 0.6509434, g: 0.63597476, b: 0.61102706, a: 0}
 --- !u!4 &769092791
 Transform:
   m_ObjectHideFlags: 0

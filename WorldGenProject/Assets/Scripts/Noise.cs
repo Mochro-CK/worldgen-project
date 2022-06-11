@@ -5,6 +5,7 @@ using UnityEngine;
 
 public static class Noise
 {
+    
     public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset)
     {
         float[,] noiseMap = new float[mapWidth, mapHeight];
@@ -135,6 +136,72 @@ public static class Noise
             }
         }
         return TempnoiseMap;
+    }
+
+    public static float[,] GenerateWaterMap(int mapWidth, int mapHeight, int Wtrseed, float Wtrscale, int Wtroctaves, float Wtrpersistance, float Wtrlacunarity, Vector2 Wtroffset)
+    {
+        float[,] WtrempnoiseMap = new float[mapWidth, mapHeight];
+
+        System.Random prng = new System.Random(Wtrseed);
+        Vector2[] WtroctaveOffsets = new Vector2[Wtroctaves];
+        for (int i = 0; i < Wtroctaves; i++)
+        {
+            float WtroffsetX = prng.Next(-10000, 10000) + Wtroffset.x;
+            float WtroffsetY = prng.Next(-10000, 10000) + Wtroffset.y;
+            WtroctaveOffsets[i] = new Vector2(WtroffsetX, WtroffsetY);
+        }
+
+        if (Wtrscale <= 0)
+        {
+            Wtrscale = 0.001f;
+        }
+
+        float maxNoiseHeight = float.MinValue;
+        float minNoiseHeight = float.MaxValue;
+        float halfWidth = mapWidth / 2f;
+        float halfHeight = mapHeight / 2f;
+
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+
+                float Wtramplitude = 1;
+                float Wtrfrequency = 1;
+                float WtrnoiseHeight = 0;
+                for (int i = 0; i < Wtroctaves; i++)
+                {
+                    float sampleX = (x - halfWidth) / Wtrscale * Wtrfrequency + WtroctaveOffsets[i].x;
+                    float sampleY = (y - halfHeight) / Wtrscale * Wtrfrequency + WtroctaveOffsets[i].y;
+
+                    float perinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
+                    WtrnoiseHeight += perinValue * Wtramplitude;
+
+                    Wtramplitude *= Wtrpersistance;
+                    Wtrfrequency *= Wtrlacunarity;
+
+                }
+
+                if (WtrnoiseHeight > maxNoiseHeight)
+                {
+                    maxNoiseHeight = WtrnoiseHeight;
+                }
+                else if (WtrnoiseHeight < minNoiseHeight)
+                {
+                    minNoiseHeight = WtrnoiseHeight;
+                }
+
+                WtrempnoiseMap[x, y] = WtrnoiseHeight;
+            }
+        }
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                WtrempnoiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, WtrempnoiseMap[x, y]);
+            }
+        }
+        return WtrempnoiseMap;
     }
 
 }
