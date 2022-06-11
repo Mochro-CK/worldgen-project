@@ -15,11 +15,12 @@ As of 11/06/2022 (DD/MM/YYYY) :
 
 *Mochro,CK*
 
-WorldMapBiomes Early stage!
-
-![WorldMapAlpha](https://user-images.githubusercontent.com/55792972/173151741-2c6985f1-87c9-4f2e-8b3a-7a065bc882e8.PNG)
-
 WorldMapBiomes after adding more Perlin noise!
 
 ![WorldGenAlpha2](https://user-images.githubusercontent.com/55792972/173207238-c79a953d-641a-4059-9fde-983dde9b63c2.PNG)
+
+
+WorldMapBiomes Earlier stage!
+
+![WorldMapAlpha](https://user-images.githubusercontent.com/55792972/173151741-2c6985f1-87c9-4f2e-8b3a-7a065bc882e8.PNG)
 
