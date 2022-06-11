@@ -5,7 +5,6 @@ using UnityEngine;
 
 public static class Noise
 {
-    
     public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset)
     {
         float[,] noiseMap = new float[mapWidth, mapHeight];
@@ -203,6 +202,143 @@ public static class Noise
         }
         return WtrempnoiseMap;
     }
+
+    public static float[,] GenerateMoistureMap(int mapWidth, int mapHeight, int Moistseed, float Moistscale, int Moistoctaves, float Moistpersistance, float Moistlacunarity, Vector2 Moistoffset)
+    {
+        float[,] MoistempnoiseMap = new float[mapWidth, mapHeight];
+
+        System.Random prng = new System.Random(Moistseed);
+        Vector2[] MoistoctaveOffsets = new Vector2[Moistoctaves];
+        for (int i = 0; i < Moistoctaves; i++)
+        {
+            float MoistoffsetX = prng.Next(-10000, 10000) + Moistoffset.x;
+            float MoistoffsetY = prng.Next(-10000, 10000) + Moistoffset.y;
+            MoistoctaveOffsets[i] = new Vector2(MoistoffsetX, MoistoffsetY);
+        }
+
+        if (Moistscale <= 0)
+        {
+            Moistscale = 0.001f;
+        }
+
+        float maxNoiseHeight = float.MinValue;
+        float minNoiseHeight = float.MaxValue;
+        float halfWidth = mapWidth / 2f;
+        float halfHeight = mapHeight / 2f;
+
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+
+                float Moistamplitude = 1;
+                float Moistfrequency = 1;
+                float MoistnoiseHeight = 0;
+                for (int i = 0; i < Moistoctaves; i++)
+                {
+                    float sampleX = (x - halfWidth) / Moistscale * Moistfrequency + MoistoctaveOffsets[i].x;
+                    float sampleY = (y - halfHeight) / Moistscale * Moistfrequency + MoistoctaveOffsets[i].y;
+
+                    float perinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
+                    MoistnoiseHeight += perinValue * Moistamplitude;
+
+                    Moistamplitude *= Moistpersistance;
+                    Moistfrequency *= Moistlacunarity;
+
+                }
+
+                if (MoistnoiseHeight > maxNoiseHeight)
+                {
+                    maxNoiseHeight = MoistnoiseHeight;
+                }
+                else if (MoistnoiseHeight < minNoiseHeight)
+                {
+                    minNoiseHeight = MoistnoiseHeight;
+                }
+
+                MoistempnoiseMap[x, y] = MoistnoiseHeight;
+            }
+        }
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                MoistempnoiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, MoistempnoiseMap[x, y]);
+            }
+        }
+        return MoistempnoiseMap;
+    }
+
+    public static float[,] GenerateErosionMap(int mapWidth, int mapHeight, int Erosionseed, float Erosionscale, int Erosionoctaves, float Erosionpersistance, float Erosionlacunarity, Vector2 Erosionoffset)
+    {
+        float[,] ErosionnoiseMap = new float[mapWidth, mapHeight];
+
+        System.Random prng = new System.Random(Erosionseed);
+        Vector2[] ErosionoctaveOffsets = new Vector2[Erosionoctaves];
+        for (int i = 0; i < Erosionoctaves; i++)
+        {
+            float ErosionoffsetX = prng.Next(-10000, 10000) + Erosionoffset.x;
+            float ErosionoffsetY = prng.Next(-10000, 10000) + Erosionoffset.y;
+            ErosionoctaveOffsets[i] = new Vector2(ErosionoffsetX, ErosionoffsetY);
+        }
+
+        if (Erosionscale <= 0)
+        {
+            Erosionscale = 0.0001f;
+        }
+
+        float maxNoiseHeight = float.MinValue;
+        float minNoiseHeight = float.MaxValue;
+        float halfWidth = mapWidth / 2f;
+        float halfHeight = mapHeight / 2f;
+
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+
+                float Erosionamplitude = 1;
+                float Erosionfrequency = 1;
+                float ErosionnoiseHeight = 0;
+                for (int i = 0; i < Erosionoctaves; i++)
+                {
+                    float sampleX = (x - halfWidth) / Erosionscale * Erosionfrequency + ErosionoctaveOffsets[i].x;
+                    float sampleY = (y - halfHeight) / Erosionscale * Erosionfrequency + ErosionoctaveOffsets[i].y;
+
+                    float perinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
+                    ErosionnoiseHeight += perinValue * Erosionamplitude;
+
+                    Erosionamplitude *= Erosionpersistance;
+                    Erosionfrequency *= Erosionlacunarity;
+
+                }
+
+                if (ErosionnoiseHeight > maxNoiseHeight)
+                {
+                    maxNoiseHeight = ErosionnoiseHeight;
+                }
+                else if (ErosionnoiseHeight < minNoiseHeight)
+                {
+                    minNoiseHeight = ErosionnoiseHeight;
+                }
+
+                ErosionnoiseMap[x, y] = ErosionnoiseHeight;
+            }
+        }
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                ErosionnoiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, ErosionnoiseMap[x, y]);
+            }
+        }
+        return ErosionnoiseMap;
+    }
+
+
+
+
+
 
 }
 

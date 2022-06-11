@@ -200,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 535198095}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1500, y: 1, z: 1500}
+  m_LocalScale: {x: 2000, y: 1, z: 2000}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -237,83 +237,145 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 1
-  mapWidth: 1500
-  mapHeight: 1500
-  seed: 285
-  Tseed: 227
-  Wtrseed: 401
+  mapWidth: 2000
+  mapHeight: 2000
+  seed: 111
+  Tseed: 263
+  Wtrseed: 237
+  Moistseed: 46
+  Erosionseed: 358
   autoUpdate: 0
-  noiseScale: 200
+  noiseScale: 60
   octaves: 2
   persistance: 0.5
-  lacunarity: 1
+  lacunarity: 3
   offset: {x: 0, y: 0}
-  TnoiseScale: 500
-  Toctaves: 5
-  Tpersistance: 0.2
-  Tlacunarity: 1
+  TnoiseScale: 150
+  Toctaves: 2
+  Tpersistance: 0.5
+  Tlacunarity: 3
   Toffset: {x: 0, y: 0}
-  WtrnoiseScale: 250
-  Wtroctaves: 5
-  Wtrpersistance: 1
+  WtrnoiseScale: 40
+  Wtroctaves: 2
+  Wtrpersistance: 0.6
   Wtrlacunarity: 1
   Wtroffset: {x: 0, y: 0}
+  MoistnoiseScale: 300
+  Moistoctaves: 2
+  Moistpersistance: 0.4
+  Moistlacunarity: 3
+  Moistoffset: {x: 0, y: 0}
+  ErosionnoiseScale: 250
+  Erosionoctaves: 2
+  Erosionpersistance: 0.5
+  Erosionlacunarity: 1
+  Erosionoffset: {x: 0, y: 0}
   regions:
   - name: LEAVEBLANK
     height: 0
     temp: 0
     water: 0
+    moisture: 0
+    erosion: 0
     colour: {r: 0, g: 0, b: 0, a: 0}
-  - name: Land
-    height: 0.2
-    temp: 0.5
+  - name: HillLand-D
+    height: 0
+    temp: 0
     water: 0
-    colour: {r: 0.3621791, g: 0.764151, b: 0.26312745, a: 0}
-  - name: Inland
-    height: 0.3
-    temp: 1
+    moisture: 0
+    erosion: 0
+    colour: {r: 0.46226418, g: 0.4054334, b: 0.28128338, a: 0}
+  - name: Mountain-D
+    height: 0
+    temp: 0
     water: 0
-    colour: {r: 0.3871589, g: 0.6603774, b: 0.32084376, a: 0}
-  - name: Desert
-    height: 0.3
-    temp: 0.5
+    moisture: 0
+    erosion: 0
+    colour: {r: 0.1792453, g: 0.1690442, b: 0.14796191, a: 0}
+  - name: Snow-D
+    height: 0
+    temp: 0
     water: 0
-    colour: {r: 1, g: 0.5779401, b: 0, a: 0}
-  - name: Tundra
-    height: 0.45
-    temp: 1
-    water: 0
-    colour: {r: 0.990566, g: 0.80652523, b: 0.55602527, a: 0}
+    moisture: 0
+    erosion: 0
+    colour: {r: 0.6509434, g: 0.63597476, b: 0.61102706, a: 0}
   - name: ColdWater
-    height: 0.1
+    height: 1
     temp: 1
     water: 0.55
-    colour: {r: 0, g: 0.8446779, b: 1, a: 0}
-  - name: ColdWater
-    height: 0.1
-    temp: 1
-    water: 0.55
-    colour: {r: 0, g: 0.8446779, b: 1, a: 0}
+    moisture: 0.3
+    erosion: 1
+    colour: {r: 0.08770915, g: 0.5944094, b: 0.6886792, a: 0}
   - name: Beach
-    height: 0.2
+    height: 1
     temp: 1
     water: 0.5
-    colour: {r: 0.48001543, g: 0.5849056, b: 0.10760058, a: 0}
-  - name: HillLand
+    moisture: 0.32
+    erosion: 1
+    colour: {r: 0.8019583, g: 0.8113208, b: 0.28702387, a: 0}
+  - name: Land
     height: 0.5
-    temp: 0.6
+    temp: 0.4
     water: 0
-    colour: {r: 0.46226418, g: 0.4054334, b: 0.28128338, a: 0}
-  - name: Mountain
-    height: 1
+    moisture: 1
+    erosion: 0.8
+    colour: {r: 0.3621791, g: 0.764151, b: 0.26312745, a: 0}
+  - name: Inland
+    height: 0.6
+    temp: 0.4
+    water: 0
+    moisture: 1
+    erosion: 0.8
+    colour: {r: 0.3871589, g: 0.6603774, b: 0.32084376, a: 0}
+  - name: Desert
+    height: 0.6
+    temp: 0.3
+    water: 0
+    moisture: 0.5
+    erosion: 0.6
+    colour: {r: 0.7169812, g: 0.7051862, b: 0.0033819948, a: 0}
+  - name: HighInland
+    height: 0.75
     temp: 0.7
     water: 0
-    colour: {r: 0.1792453, g: 0.1690442, b: 0.14796191, a: 0}
-  - name: Snow
+    moisture: 0.3
+    erosion: 0.65
+    colour: {r: 0.5660041, g: 0.7830189, b: 0.5133945, a: 0}
+  - name: Tundra
+    height: 0.9
+    temp: 0.9
+    water: 0
+    moisture: 0.3
+    erosion: 0.7
+    colour: {r: 0.6236205, g: 0.9245283, b: 0.836802, a: 0}
+  - name: LushBarrenHeights
+    height: 0.92
+    temp: 0.65
+    water: 0
+    moisture: 0.9
+    erosion: 0.82
+    colour: {r: 0.3820755, g: 0.509434, b: 0.3878645, a: 0}
+  - name: Mountain
+    height: 0.9
+    temp: 1
+    water: 0
+    moisture: 0.4
+    erosion: 0.87
+    colour: {r: 0.3490566, g: 0.345352, b: 0.33423817, a: 0}
+  - name: FrozenPeaksMountain
+    height: 0.97
+    temp: 1
+    water: 0
+    moisture: 0.8
+    erosion: 0.9
+    colour: {r: 0.6198825, g: 0.65784645, b: 0.6603774, a: 0}
+  - name: SnowyPeaks
     height: 1
     temp: 1
     water: 0
-    colour: {r: 0.6509434, g: 0.63597476, b: 0.61102706, a: 0}
+    moisture: 1
+    erosion: 1
+    colour: {r: 1, g: 1, b: 1, a: 0}
 --- !u!4 &769092791
 Transform:
   m_ObjectHideFlags: 0
