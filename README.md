@@ -21,4 +21,5 @@ WorldMapBiomes Early stage!
 
 WorldMapBiomes after adding more Perlin noise!
 
-![WorldMapAlphaSecondImage](https://user-images.githubusercontent.com/55792972/173207154-7a630d3a-668f-4203-bf4e-ca74f0ecdfb4.PNG)
+![WorldGenAlpha2](https://user-images.githubusercontent.com/55792972/173207238-c79a953d-641a-4059-9fde-983dde9b63c2.PNG)
+
